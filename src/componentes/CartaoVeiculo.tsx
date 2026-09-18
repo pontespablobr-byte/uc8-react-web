@@ -1,22 +1,25 @@
-const veiculo = {
-  id: 1,
-  modelo: "Fiat Strada",
-  placa: "QWE-1234",
-  quilometragem: 85000,
-};
+import type { Veiculo } from "../types/entidades";
 
-export function CartaoVeiculo() {
+interface CartaoVeiculoProps {
+  veiculo: Veiculo;
+  limiteManutencao?: number;
+}
+
+export function CartaoVeiculo({
+  veiculo,
+  limiteManutencao = 50000,
+}: CartaoVeiculoProps) {
   return (
     <article>
       <h2>{veiculo.modelo}</h2>
 
       <p>Placa: {veiculo.placa}</p>
 
-      <p>
-        Quilometragem:
-        {" "}
-        {veiculo.quilometragem} km
-      </p>
+      <p>{veiculo.quilometragem} km</p>
+
+      {veiculo.quilometragem >= limiteManutencao && (
+        <p>Necessita manutenção preventiva</p>
+      )}
     </article>
   );
 }
