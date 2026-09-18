@@ -17,8 +17,14 @@ export function CartaoVeiculo({
 
       <p>{veiculo.quilometragem} km</p>
 
+      <p>
+        {veiculo.observacao ?? "Sem observações"}
+      </p>
+
       {veiculo.quilometragem >= limiteManutencao && (
-        <p>Necessita manutenção preventiva</p>
+        <p className="alerta">
+          Necessita manutenção preventiva
+        </p>
       )}
     </article>
   );

@@ -9,6 +9,7 @@ const veiculo1: Veiculo = {
   modelo: "Fiat Strada",
   placa: "QWE-1234",
   quilometragem: 85000,
+  observacao: "Troca de óleo realizada",
 };
 
 const veiculo2: Veiculo = {
@@ -23,9 +24,14 @@ export default function App() {
     <main>
       <Cabecalho />
 
-      <CartaoVeiculo veiculo={veiculo1} />
+      <CartaoVeiculo
+        veiculo={veiculo1}
+        limiteManutencao={80000}
+      />
 
-      <CartaoVeiculo veiculo={veiculo2} />
+      <CartaoVeiculo
+        veiculo={veiculo2}
+      />
 
       <Rodape />
     </main>
