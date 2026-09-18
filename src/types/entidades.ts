@@ -3,4 +3,5 @@ export interface Veiculo {
   modelo: string;
   placa: string;
   quilometragem: number;
+  observacao?: string;
 }
