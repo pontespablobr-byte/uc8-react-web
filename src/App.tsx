@@ -1,43 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Veiculo } from "./types/entidades";
 
 import { Cabecalho } from "./componentes/Cabecalho";
-import { CartaoVeiculo } from "./componentes/CartaoVeiculo";
 import { FormularioVeiculo } from "./componentes/FormularioVeiculo";
+import { ListaVeiculos } from "./componentes/ListaVeiculos";
 import { Rodape } from "./componentes/Rodape";
-
-const veiculo1Inicial: Veiculo = {
-  id: 1,
-  modelo: "Fiat Strada",
-  placa: "QWE-1234",
-  quilometragem: 85000,
-  observacao: "Troca de óleo realizada",
-};
-
-const veiculo2: Veiculo = {
-  id: 2,
-  modelo: "Toyota Hilux",
-  placa: "ABC-5678",
-  quilometragem: 45000,
-};
+import { carregarVeiculos } from "./servicos/veiculos";
 
 export default function App() {
-  const [veiculo1, setVeiculo1] = useState<Veiculo>(veiculo1Inicial);
+  const [veiculos, setVeiculos] = useState<Veiculo[]>([]);
+  const [carregando, setCarregando] = useState(true);
+
+  useEffect(() => {
+    carregarVeiculos().then((resultado) => {
+      setVeiculos(resultado);
+      setCarregando(false);
+    });
+  }, []);
 
   return (
     <main>
       <Cabecalho />
 
-      <FormularioVeiculo aoEnviar={setVeiculo1} />
-
-      <CartaoVeiculo
-        veiculo={veiculo1}
-        limiteManutencao={80000}
+      <FormularioVeiculo
+        aoEnviar={(novo) => setVeiculos([...veiculos, novo])}
       />
 
-      <CartaoVeiculo
-        veiculo={veiculo2}
-      />
+      {carregando ? (
+        <p>Carregando a frota...</p>
+      ) : (
+        <ListaVeiculos veiculos={veiculos} />
+      )}
 
       <Rodape />
     </main>

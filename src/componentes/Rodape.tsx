@@ -1,4 +1,3 @@
-
 export function Rodape() {
   return (
     <footer>

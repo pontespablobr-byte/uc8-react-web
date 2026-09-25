@@ -10,7 +10,6 @@ export function CartaoVeiculo({
   veiculo,
   limiteManutencao = 50000,
 }: CartaoVeiculoProps) {
-
   const [mostrarDetalhes, setMostrarDetalhes] = useState(false);
 
   return (
