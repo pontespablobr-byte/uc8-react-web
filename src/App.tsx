@@ -1,10 +1,12 @@
+import { useState } from "react";
 import type { Veiculo } from "./types/entidades";
 
 import { Cabecalho } from "./componentes/Cabecalho";
 import { CartaoVeiculo } from "./componentes/CartaoVeiculo";
+import { FormularioVeiculo } from "./componentes/FormularioVeiculo";
 import { Rodape } from "./componentes/Rodape";
 
-const veiculo1: Veiculo = {
+const veiculo1Inicial: Veiculo = {
   id: 1,
   modelo: "Fiat Strada",
   placa: "QWE-1234",
@@ -20,9 +22,13 @@ const veiculo2: Veiculo = {
 };
 
 export default function App() {
+  const [veiculo1, setVeiculo1] = useState<Veiculo>(veiculo1Inicial);
+
   return (
     <main>
       <Cabecalho />
+
+      <FormularioVeiculo aoEnviar={setVeiculo1} />
 
       <CartaoVeiculo
         veiculo={veiculo1}

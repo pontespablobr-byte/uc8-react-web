@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { Veiculo } from "../types/entidades";
 
 interface CartaoVeiculoProps {
@@ -9,22 +10,29 @@ export function CartaoVeiculo({
   veiculo,
   limiteManutencao = 50000,
 }: CartaoVeiculoProps) {
+
+  const [mostrarDetalhes, setMostrarDetalhes] = useState(false);
+
   return (
     <article>
       <h2>{veiculo.modelo}</h2>
 
-      <p>Placa: {veiculo.placa}</p>
+      <button onClick={() => setMostrarDetalhes(!mostrarDetalhes)}>
+        {mostrarDetalhes ? "Ocultar detalhes" : "Ver detalhes"}
+      </button>
 
-      <p>{veiculo.quilometragem} km</p>
+      {mostrarDetalhes && (
+        <>
+          <p>Placa: {veiculo.placa}</p>
+          <p>{veiculo.quilometragem} km</p>
+          <p>{veiculo.observacao ?? "Sem observações"}</p>
 
-      <p>
-        {veiculo.observacao ?? "Sem observações"}
-      </p>
-
-      {veiculo.quilometragem >= limiteManutencao && (
-        <p className="alerta">
-          Necessita manutenção preventiva
-        </p>
+          {veiculo.quilometragem >= limiteManutencao && (
+            <p className="alerta">
+              Necessita manutenção preventiva
+            </p>
+          )}
+        </>
       )}
     </article>
   );
